@@ -6,6 +6,7 @@ import { IPost } from "./home";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import { FiEdit3 } from "react-icons/fi";
+import EditTitle from "../components/EditTitle";
 
 export interface IComments {
   content: string;
@@ -109,9 +110,17 @@ const Detail: FC = () => {
       {post ? (
         <>
           <div className="border-b-2">
-            <h1 className="text-center font-bold py-8 text-2xl">
-              {post.title}{" "}
-            </h1>
+            {account === post.user.account ? (
+              <EditTitle
+                title={post.title}
+                postId={post.id}
+                setPost={setPost}
+              />
+            ) : (
+              <h1 className="text-center font-bold py-8 text-2xl">
+                {post.title}
+              </h1>
+            )}
             <div className="pb-2 text-sm px-20 flex justify-between">
               <div>
                 {account === post.user.account && (
